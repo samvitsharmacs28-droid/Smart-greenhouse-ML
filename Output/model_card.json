@@ -1,0 +1,170 @@
+{
+  "features": [
+    "Tair",
+    "Rhair",
+    "CO2air",
+    "HumDef",
+    "Tot_PAR",
+    "PipeGrow",
+    "PipeLow",
+    "VentLee",
+    "Ventwind",
+    "BlackScr",
+    "EnScr",
+    "AssimLight",
+    "Tot_PAR_Lamps",
+    "co2_dos",
+    "Tout_out",
+    "Rhout_out",
+    "Iglob_out",
+    "PARout_out",
+    "Windsp_out",
+    "AbsHumOut_out",
+    "Pyrgeo_out",
+    "WC_slab1",
+    "WC_slab2",
+    "t_slab1",
+    "Tair_lag1",
+    "Tair_lag2",
+    "Tair_lag3",
+    "Tair_lag6",
+    "Tair_lag12",
+    "Tair_roll12_mean",
+    "Tair_diff1",
+    "Tair_diff6",
+    "Rhair_lag1",
+    "Rhair_lag2",
+    "Rhair_lag3",
+    "Rhair_lag6",
+    "Rhair_lag12",
+    "Rhair_roll12_mean",
+    "Rhair_diff1",
+    "Rhair_diff6",
+    "CO2air_lag1",
+    "CO2air_lag2",
+    "CO2air_lag3",
+    "CO2air_lag6",
+    "CO2air_lag12",
+    "CO2air_roll12_mean",
+    "CO2air_diff1",
+    "CO2air_diff6",
+    "HumDef_lag1",
+    "HumDef_lag2",
+    "HumDef_lag3",
+    "HumDef_lag6",
+    "HumDef_lag12",
+    "HumDef_roll12_mean",
+    "HumDef_diff1",
+    "HumDef_diff6",
+    "Tot_PAR_lag1",
+    "Tot_PAR_lag2",
+    "Tot_PAR_lag3",
+    "Tot_PAR_lag6",
+    "Tot_PAR_lag12",
+    "Tot_PAR_roll12_mean",
+    "Tot_PAR_diff1",
+    "Tot_PAR_diff6",
+    "Tin_minus_Tout",
+    "Tout_out_diff6",
+    "Iglob_out_diff6",
+    "VPD_kPa",
+    "hour_sin",
+    "hour_cos"
+  ],
+  "targets": [
+    "Tair_t+30",
+    "Tair_t+60",
+    "Rhair_t+30",
+    "Rhair_t+60"
+  ],
+  "config": {
+    "TEAM": "AICU",
+    "HORIZONS_MIN": [
+      30,
+      60
+    ],
+    "STEP_MIN": 5,
+    "TARGETS": [
+      "Tair",
+      "Rhair"
+    ],
+    "LAGS": [
+      1,
+      2,
+      3,
+      6,
+      12
+    ],
+    "TRAIN_FRAC": 0.7,
+    "VAL_FRAC": 0.15,
+    "MAX_GAP_STEPS": 6,
+    "SEQ_LEN": 12,
+    "EPOCHS": 30,
+    "BATCH": 256,
+    "TUNE_TRIALS": 25,
+    "INTERVAL": [
+      0.1,
+      0.9
+    ],
+    "VENT_T": 25.0,
+    "HEAT_T": 18.0,
+    "RH_HIGH": 90.0,
+    "OUT_DIR": "outputs"
+  },
+  "tuned_params": {
+    "learning_rate": 0.014936939870497818,
+    "num_leaves": 65,
+    "min_child_samples": 19,
+    "subsample": 0.6197468441387008,
+    "colsample_bytree": 0.6095184229841988,
+    "reg_lambda": 0.012514692489606351
+  },
+  "ensemble_members": {
+    "Tair_t+30": [
+      "LightGBM",
+      "LightGBM-tuned",
+      "XGBoost"
+    ],
+    "Tair_t+60": [
+      "LightGBM-tuned",
+      "RandomForest",
+      "XGBoost"
+    ],
+    "Rhair_t+30": [
+      "LightGBM",
+      "LightGBM-tuned",
+      "RandomForest"
+    ],
+    "Rhair_t+60": [
+      "XGBoost",
+      "LightGBM-tuned",
+      "LightGBM"
+    ]
+  },
+  "best_models": {
+    "Rhair_t+30": "LightGBM",
+    "Rhair_t+60": "LightGBM-tuned",
+    "Tair_t+30": "RandomForest",
+    "Tair_t+60": "RandomForest"
+  },
+  "roc_auc_ventilate": {
+    "Proactive (ML forecast)": 0.9854179327035052,
+    "Reactive (current value)": 0.9734415300613457
+  },
+  "lead_time_median_min": 15.0,
+  "lead_time_events": 25,
+  "interval_conformal_offsets": {
+    "Tair_t+30": 0.15854707195783016,
+    "Tair_t+60": 0.2370078348340366,
+    "Rhair_t+30": 0.42485664611761503,
+    "Rhair_t+60": 0.8224905950548872
+  },
+  "lab_whatif": {
+    "time": "2020-05-14 09:25:00",
+    "vent": 0,
+    "pipe": 0,
+    "predicted": 24.480665324759777,
+    "status": "inside the target band",
+    "actual_30min_later": 25.2
+  }
+}
